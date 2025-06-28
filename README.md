@@ -1,4 +1,4 @@
-GitHub Repo stars GitHub forks contributors-shield LinkedIn
+PNEUMONIA DETECTION USING MACHINE LEARNING
 
 <br /> <p align="center"> <a href="https://github.com/rppradhan08/pneumonia-detection"> <img src="https://raw.githubusercontent.com/rppradhan08/pneumonia-detection/master/images/logo.PNG" alt="Logo" width="200px" height="100px"> </a> <p align="center"> <b>Pneumonia Detection Using CNN</b> <br /> <a href="https://github.com/rppradhan08/pneumonia-detection"><strong>Explore the docs »</strong></a> <br /><br /> <a href="https://github.com/rppradhan08/pneumonia-detection">View Demo</a> · <a href="https://github.com/rppradhan08/pneumonia-detection/issues">Report Bug</a> </p> </p>
 Table of Contents
