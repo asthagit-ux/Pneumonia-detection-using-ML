@@ -1,23 +1,76 @@
 {% extends "base.html" %}
-
-{% block head %} <title>Result</title> {% endblock %}
-
+{% block head %} <title>InnoDx — Results</title> {% endblock %}
 {% block body %}
 
-<div>
-    <h2>Uploaded Image : {{name}}</h2>
+<div class="results-section">
+    <div class="results-card">
+        <div class="results-header">
+            <a href="{{ url_for('home')}}" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                New Analysis
+            </a>
+            <span class="results-tag">Analysis Complete</span>
+        </div>
+
+        <div class="results-body">
+            <div class="xray-panel">
+                <div class="xray-label">Uploaded X-Ray</div>
+                <div class="xray-frame">
+                    <img src="/static/uploads/{{name}}" alt="uploaded xray" class="xray-img">
+                </div>
+                <p class="xray-filename">{{ name }}</p>
+            </div>
+
+            <div class="verdict-panel">
+                <div class="verdict-label">Diagnosis Result</div>
+
+                {% if result == 1 %}
+                <div class="verdict pneumonia">
+                    <div class="verdict-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <h2 class="verdict-title">Pneumonia Detected</h2>
+                    <p class="verdict-desc">The model has identified patterns consistent with pneumonia in this X-ray. Please consult a qualified medical professional for proper diagnosis.</p>
+                    <div class="verdict-badge pneumonia-badge">High Risk Indicators Found</div>
+                </div>
+                {% else %}
+                <div class="verdict normal">
+                    <div class="verdict-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h2 class="verdict-title">Normal — No Pneumonia</h2>
+                    <p class="verdict-desc">The model did not detect significant signs of pneumonia in this X-ray. Always follow up with a healthcare provider for confirmation.</p>
+                    <div class="verdict-badge normal-badge">No Risk Indicators Found</div>
+                </div>
+                {% endif %}
+
+                <div class="model-info">
+                    <div class="info-item">
+                        <span class="info-label">Model</span>
+                        <span class="info-val">CNN (Keras)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dataset</span>
+                        <span class="info-val">Kaggle Chest X-Ray</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Input</span>
+                        <span class="info-val">{{ name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<img src="static\uploads\{{name}}" alt="uploaded image" class="image-class">
-<div>
-    {% if result == 1 %}
-        <div><h2 style="color:rgba(197, 94, 94, 0.753);">PNEUMONIA</h2></div>
-    {% else %}
-        <div><h2 style="color:rgba(2, 104, 45, 0.781);">NORMAL</h2></div>
-    {% endif %}
-</div>
-<div>
-    <form action="{{ url_for('home')}}">
-        <button type="submit" class="button-class">Home</button>
-    </form>
-</div>
+
 {% endblock %}
