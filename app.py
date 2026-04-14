@@ -6,7 +6,7 @@ import os
 import cv2
 
 # Creating a Flask Instance
-app = Flask(__name__)
+app = Flask(__name__, template_folder='Layouts')
 
 
 IMAGE_SIZE = (150, 150)
