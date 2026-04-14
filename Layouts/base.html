@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap">
     {% block head %} {% endblock %}
 </head>
 <body>
-    <div class="top-header">
-        <h1>Pneumonia Detection</h1>
-    </div>
-    {% block body %} {% endblock %}
+    <div class="bg-grid"></div>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <div class="logo-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+            </div>
+            <span>InnoDx</span>
+        </div>
+        <div class="nav-badge">AI Diagnostic Tool</div>
+    </nav>
+
+    <main class="main-content">
+        {% block body %} {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Built with CNN + Flask &nbsp;·&nbsp; For educational purposes only &nbsp;·&nbsp; Not a medical device</p>
+    </footer>
 </body>
 </html>
