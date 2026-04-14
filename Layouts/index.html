@@ -1,13 +1,88 @@
 {% extends "base.html" %}
-
-{% block head %} <title>Pneumonia Detection</title> {% endblock %}
-
+{% block head %} <title>InnoDx — Pneumonia Detection</title> {% endblock %}
 {% block body %}
-<div class="form-class">
-    <form action="{{ url_for('upload_file')}}" method="POST" enctype="multipart/form-data">
-        <label for="imageFile">Upload Image</label><br>
-        <input type="file" name="imageFile" class="upload-class" required><br>
-        <button type="submit" class="button-class">Result</button>
-    </form>
+
+<div class="hero-section">
+    <div class="hero-left">
+        <div class="tag">CNN-Powered Analysis</div>
+        <h1 class="hero-title">Chest X-Ray<br><span class="accent">Pneumonia</span><br>Detection</h1>
+        <p class="hero-sub">Upload a chest X-ray image and our deep learning model will analyze it for signs of pneumonia in seconds.</p>
+        <div class="stats-row">
+            <div class="stat">
+                <span class="stat-num">5,863</span>
+                <span class="stat-label">Training Images</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">CNN</span>
+                <span class="stat-label">Architecture</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">Keras</span>
+                <span class="stat-label">Framework</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <div class="upload-card">
+            <div class="card-header">
+                <div class="pulse-dot"></div>
+                <span>Ready to Analyze</span>
+            </div>
+            <form action="{{ url_for('upload_file')}}" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <div class="drop-zone" id="dropZone" onclick="document.getElementById('imageFile').click()">
+                    <div class="drop-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <p class="drop-title">Drop your X-ray here</p>
+                    <p class="drop-sub">or click to browse · JPG, PNG, JPEG</p>
+                    <div class="file-selected" id="fileSelected" style="display:none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span id="fileName"></span>
+                    </div>
+                    <input type="file" name="imageFile" id="imageFile" accept="image/*" required style="display:none;">
+                </div>
+                <button type="submit" class="analyze-btn" id="analyzeBtn">
+                    <span class="btn-text">Analyze X-Ray</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </button>
+            </form>
+            <p class="disclaimer">⚠️ For research & educational use only. Not a substitute for medical advice.</p>
+        </div>
+    </div>
 </div>
+
+<script>
+    const fileInput = document.getElementById('imageFile');
+    const fileSelected = document.getElementById('fileSelected');
+    const fileName = document.getElementById('fileName');
+    const dropZone = document.getElementById('dropZone');
+
+    fileInput.addEventListener('change', function() {
+        if (this.files[0]) {
+            fileSelected.style.display = 'flex';
+            fileName.textContent = this.files[0].name;
+            dropZone.classList.add('has-file');
+        }
+    });
+
+    document.getElementById('analyzeBtn').addEventListener('click', function() {
+        if (fileInput.files[0]) {
+            this.querySelector('.btn-text').textContent = 'Analyzing...';
+            this.disabled = true;
+        }
+    });
+</script>
+
 {% endblock %}
